@@ -1,5 +1,5 @@
 # ====================================================================================
-# ==== Simulation study ====
+# ==== Binomial simulation study ====
 # ====================================================================================
 
 ## This simulation study is designed to assess the inferential performance of the three-stage approximate model fitting algorithm.
