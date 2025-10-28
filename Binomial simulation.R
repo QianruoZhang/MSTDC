@@ -19,6 +19,7 @@
 # ====================================================================================
 # ==== Read in libraries ====
 # ====================================================================================
+
 library(tidyverse)
 library(spdep)
 library(MASS)
@@ -39,6 +40,7 @@ load("Simulated_W.Rdata")
 load("Simulated_bin data.Rdata")
 
 
+
 # ====================================================================================
 # ==== Generate quantities ====
 # ====================================================================================
@@ -55,6 +57,7 @@ graphs <- graph_from_adjacency_matrix(W, mode = "max", diag = FALSE)
 D.graph <- distances(graphs) 
 
 epsilon <- 0 # Weight's threshold for MSTDC-WA
+
 
 
 # ====================================================================================
@@ -90,6 +93,8 @@ HN.prior = "expression:
   return(log_dens);  
 "
 
+
+
 # ====================================================================================
 # ==== Simulation study  ====
 # ====================================================================================
@@ -122,6 +127,7 @@ time.sep <- system.time({
 rm(mod.sep)
 
 
+
 ### ==== Knorr-Held Type IV model ====
 
 time.kn4 <- system.time({
@@ -152,6 +158,7 @@ time.kn4 <- system.time({
 rm(mod.kn4)
 
 
+
 ### ==== Rushworth model ====
 
 time.rush <- system.time({
@@ -180,6 +187,7 @@ time.rush <- system.time({
 rm(mod.rush)
 
 
+
 ### ==== MSTDC algorithm with a model-based smoother ====
 
 time.mb <- system.time({
@@ -204,12 +212,12 @@ time.mb <- system.time({
       filter(year == t) %>%
       mutate(ave.phi = ave.phi)
     
-    # Generate formula for a Binomial logistic model
+    # Generate formula for a binomial logistic model
     form.mb <- Y ~ 
       offset(ave.phi) +
       f(space1, model = 'besagproper2', graph = W.g, constr = FALSE, hyper = list(theta1 = list(prior = HN.prior), theta2 = list(param = c(0, 0.25))))
     
-    # Fitting a Binomial logistic model with offsets
+    # Fitting a binomial logistic model with offsets
     mod.mb <- inla(
       formula = form.mb, 
       family = "binomial", 
@@ -253,6 +261,7 @@ time.mb <- system.time({
 
 # Remove mod.final.mb from the environment
 rm(mod.final.mb)
+
 
 
 ### ==== MSTDC algorithm with average weights ====
