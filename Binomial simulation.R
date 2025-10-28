@@ -5,7 +5,7 @@
 ## This simulation study is designed to assess the inferential performance of the three-stage approximate model fitting algorithm.
 
 ## Competitor models include:
-# Sep - The separable model proposed by Knorr-Held and Besag (1998
+# Sep - The separable model proposed by Knorr-Held and Besag (1998)
 # KN4 - The non-separable model with spatio-temporally autocorrelated interactions proposed by Knorr-Held (2000)
 # Rush - The spatially correlated temporal AR(1) process model proposed by Rushworth et al. (2014)
 # MSTDC-MB - The proposed three-stage model fitting algorithm with a model-based smoother
@@ -31,8 +31,6 @@ library(igraph) # Define graph distance
 # ====================================================================================
 # ==== Read in files ====
 # ====================================================================================
-
-setwd("C:\\Users\\3048532Z\\OneDrive - University of Glasgow\\MSTDC\\Code\\Github")
 
 ## Load the simulated neighbourhood matrix containing 3,487 LSOAs
 load("Simulated_W.Rdata")
@@ -182,7 +180,7 @@ time.rush <- system.time({
 rm(mod.rush)
 
 
-### ==== MSTDC model with a binomial logistic smoother in stage 2  ====
+### ==== MSTDC algorithm with a model-based smoother ====
 
 time.mb <- system.time({
   
@@ -257,7 +255,7 @@ time.mb <- system.time({
 rm(mod.final.mb)
 
 
-### ==== MSTDC model with weighted average smoother (exp(-graph distance)) in stage 2 ====
+### ==== MSTDC algorithm with average weights ====
 
 time.wa <- system.time({
   
